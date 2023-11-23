@@ -1,13 +1,16 @@
 package com.usu.kelasusumobile.search
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ListView
 import androidx.appcompat.widget.SearchView
 import com.usu.kelasusumobile.R
+import com.usu.kelasusumobile.databinding.ActivityMainBinding
 import com.usu.kelasusumobile.databinding.FragmentSearchBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -25,57 +28,52 @@ class SearchFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var binding: FragmentSearchBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("SearchFragment", "onCreate Called")
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+
         }
     }
-
-    private lateinit var binding: FragmentSearchBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentSearchBinding.inflate(inflater, container, false)
+        binding = FragmentSearchBinding.inflate(inflater,container,false)
+
+        val subject = arrayOf("Computer Graphics", "Artificial Intelligence", "Research Method","Software Project")
+        val subjectAdapter: ArrayAdapter<String> = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, subject)
+
+        binding.listSubject.adapter = subjectAdapter
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.searchView.clearFocus()
+                if (subject.contains(query)){
+                    subjectAdapter.filter.filter(query)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                subjectAdapter.filter.filter(newText)
+                return false
+            }
+
+        })
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Implementasi SearchView
-        val subject = arrayOf("Artificial Intelligence", "Computer Graphics", "Research Method", "Software Project")
-//        val lecturer = arrayOf("Amalia Mahdi, Jos Timanta Tarigan, Hayatunnufus, Anandhini Medianty")
-
-        val subjectAdapter: ArrayAdapter<String> = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, subject)
-//        val lecturerAdapter: ArrayAdapter<String> = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_2, lecturer)
-
-//        val mergeAdapter = MergeAdapter(subjectAdapter, lecturerAdapter)
-
-        binding.subjectList.adapter = subjectAdapter
-
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                binding.searchView.clearFocus()
-                if (subject.contains(query)){
-                    subjectAdapter.filter.filter(query)
-                }
-//                if (lecturer.contains(query)){
-//                    lecturerAdapter.filter.filter(query)
-//                }
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                subjectAdapter.filter.filter(newText)
-//                lecturerAdapter.filter.filter(newText)
-                return false
-            }
-        })
     }
 
     companion object {
