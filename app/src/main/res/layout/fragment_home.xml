@@ -60,7 +60,7 @@
         android:layout_below="@id/askinguser"
         android:layout_marginTop="20dp"
         app:cardCornerRadius="10dp"
-        android:backgroundTint="@color/softblue">
+        android:backgroundTint="@color/softBlue">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -133,7 +133,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         app:cardCornerRadius="20dp"
-        android:backgroundTint="@color/softyellow">
+        android:backgroundTint="@color/softYellow">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -170,7 +170,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginTop="20dp"
         app:cardCornerRadius="20dp"
-        android:backgroundTint="@color/softblue">
+        android:backgroundTint="@color/softPurple">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -207,7 +207,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         app:cardCornerRadius="20dp"
-        android:backgroundTint="@color/softgreen">
+        android:backgroundTint="@color/softGreen">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -244,7 +244,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginTop="20dp"
         app:cardCornerRadius="20dp"
-        android:backgroundTint="@color/softpink">
+        android:backgroundTint="@color/softPink">
 
         <RelativeLayout
             android:layout_width="wrap_content"
